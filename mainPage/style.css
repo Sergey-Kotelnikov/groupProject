@@ -1,0 +1,49 @@
+*{
+  box-sizing: border-box;
+}
+
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+html{
+  font-size: 62.5%;
+  box-sizing: content-box;
+  display: block;
+  float: none;
+  line-height: normal;
+  position: static;
+  z-index: auto;
+  background: rgba(71, 197, 255, 0.911)
+}
+
+h1 {
+  height: 50px;
+  color:rgb(16, 32, 82);
+  border: 5px solid rgb(2, 71, 88);
+  padding-left: 170px
+}
+h3 {
+height: 20px;
+color: rgba(0, 0, 0, 0.938);
+}
+
+p{
+  font-size: 150%;
+  color: darkviolet;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}

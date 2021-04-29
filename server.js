@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv')
 const MongoClient = require('mongodb').MongoClient
-const PORT = 3000;
+const PORT = 3000
 dotenv.config()
 
 let db,
@@ -16,24 +16,28 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
   })
 
 app.set('view engine', 'ejs')
-app.use(express.static('public'))
+app.use(express.static('loginPage'))
+app.use(express.static('feedPage'))
+app.use(express.static('registerPage'))
+app.use(express.static('mainPage'))
+
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 
-
-app.get('/', (request, response) => {
-  response.sendFile(__dirname + '/loginPage/index.html')
+app.get('/', (req, res) => {
+  res.sendFile('/loginPage/index.html')
 })
 
-app.post('/add', (request, response) => { })
 
-app.put('/add', (request, response) => { })
+// app.post('/add', (request, response) => { })
 
-app.delete('/delete', (request, response) => { })
+// app.put('/add', (request, response) => { })
+
+// app.delete('/delete', (request, response) => { })
 
 
-
-app.listen(process.env.PORT || PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

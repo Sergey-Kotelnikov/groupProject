@@ -30,7 +30,7 @@ h1 {
   height: 50px;
   color:rgb(16, 32, 82);
   border: 5px solid rgb(2, 71, 88);
-  padding-left: 170px
+  text-align: center;
 }
 h3 {
 height: 20px;
@@ -43,7 +43,3 @@ p{
   text-align: center;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}

@@ -1,14 +1,28 @@
 {
-  "name": "groupprojectone",
+  "name": "groupproject",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosielMatos/groupProject.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JosielMatos/groupProject/issues"
+  },
+  "homepage": "https://github.com/JosielMatos/groupProject#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongo-client": "^0.2.1",
+    "mongodb": "^3.6.6",
+    "nodemon": "^2.0.7"
   }
 }

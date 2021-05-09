@@ -1,1 +1,0 @@
-alert('Is JS working?')

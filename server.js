@@ -1,50 +1,63 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const dotenv = require('dotenv')
-const MongoClient = require('mongodb').MongoClient
-const PORT = 3000
-dotenv.config()
+const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const methodOverride = require("method-override");
+const flash = require("express-flash");
+const logger = require("morgan");
+const connectDB = require("./config/database");
+const mainRoutes = require("./routes/main");
+const postRoutes = require("./routes/posts");
 
-let db,
-  dbConnectionStr = process.env.DB_STRING,
-  dbName = 'posts'
+//Use .env file in config folder
+require("dotenv").config({ path: "./config/.env" });
 
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
-  .then(client => {
-    console.log(`Connected to ${dbName} Database`)
-    db = client.db(dbName)
+// Passport config
+require("./config/passport")(passport);
+
+//Connect To Database
+connectDB();
+
+//Using EJS for views
+app.set("view engine", "ejs");
+
+//Static Folder
+app.use(express.static("public"));
+
+//Body Parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+//Logging
+app.use(logger("dev"));
+
+//Use forms for put / delete
+app.use(methodOverride("_method"));
+
+// Setup Sessions - stored in MongoDB
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
+);
 
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+//Use flash messages for errors, info, ect...
+app.use(flash());
 
+//Setup Routes For Which The Server Is Listening
+app.use("/", mainRoutes);
+app.use("/post", postRoutes);
 
-app.get('/', (req, res) => {
-  res.render('index.ejs')
-})
-
-app.get('/registerPage', (req, res) => {
-  res.render('registerPage.ejs')
-})
-
-app.get('/feedPage', (req, res) => {
-  res.render('feedPage.ejs')
-})
-
-app.get('/mainPage', (req, res) => {
-  res.render('mainPage.ejs')
-})
-
-// app.post('/add', (request, response) => { })
-
-// app.put('/add', (request, response) => { })
-
-// app.delete('/delete', (request, response) => { })
-
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+//Server Running
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+});

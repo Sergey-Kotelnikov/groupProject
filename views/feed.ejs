@@ -1,0 +1,26 @@
+<%- include('partials/header') -%>
+  <header class="container">
+    <div class="text-center">
+      <h1 class="title"><a href="/profile">Who's pounding?</a></h1>
+      <h2>Everyone's posts!</h2>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row justify-content-between mt-5">
+      <a class="btn btn-dark col-2" href="/profile">Return to profile</a>
+      <a class="btn btn-dark col-2" href="/logout">Logout</a>
+    </div>
+    <div class="row justify-content-center mt-5">
+      <ul class="row list-unstyled">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id%>">
+              <img class="img-fluid" src="<%= posts[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+    </div>
+  </div>  
+<%- include('partials/footer') -%>

@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background: rgba(71, 197, 255, 0.911)
+}
+
+h2 {
+    font-family: 'Anton', sans-serif;
+}
+
+.profile-columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title { 
+    font-family: 'Anton', sans-serif;
+    font-size: 5rem;
+    text-align: center;
+}
+
+.title a {
+    color: black;
+}
